@@ -1,0 +1,115 @@
+﻿using Newtonsoft.Json;
+using System.Reflection;
+
+namespace Cleverbot.Net
+{
+    public class CleverbotResponse
+    {
+        [JsonProperty("cs")]
+        public string CleverBotState { get; set; }
+        public string Interaction_count { get; set; }
+        public string Input { get; set; }
+        public string Input_other { get; set; }
+        public string Input_label { get; set; }
+        public string Predicted_input { get; set; }
+        public string Accuracy { get; set; }
+        public string Output_label { get; set; }
+        public string Output { get; set; }
+        public string Conversation_id { get; set; }
+        public string Errorline { get; set; }
+        public string Database_version { get; set; }
+        public string Software_version { get; set; }
+        public string Time_taken { get; set; }
+        public string Random_number { get; set; }
+        public string Time_second { get; set; }
+        public string Time_minute { get; set; }
+        public string Time_hour { get; set; }
+        public string Time_day_of_week { get; set; }
+        public string Time_day { get; set; }
+        public string Time_month { get; set; }
+        public string Time_year { get; set; }
+        public string Reaction { get; set; }
+        public string Reaction_tone { get; set; }
+        public string Emotion { get; set; }
+        public string Emotion_tone { get; set; }
+        public string Clever_accuracy { get; set; }
+        public string Clever_output { get; set; }
+        public string Clever_match { get; set; }
+        public string CSRES30 { get; set; }
+        public string Time_elapsed { get; set; }
+        public string Filtered_input { get; set; }
+        public string Filtered_input_other { get; set; }
+        public string Reaction_degree { get; set; }
+        public string Emotion_degree { get; set; }
+        public string Reaction_values { get; set; }
+        public string Emotion_values { get; set; }
+        public string Callback { get; set; }
+        public string Interaction_1 { get; set; }
+        public string Interaction_1_other { get; set; }
+        public string Interaction_2 { get; set; }
+        public string Interaction_3 { get; set; }
+        public string Interaction_4 { get; set; }
+        public string Interaction_5 { get; set; }
+        public string Interaction_6 { get; set; }
+        public string Interaction_7 { get; set; }
+        public string Interaction_8 { get; set; }
+        public string Interaction_9 { get; set; }
+        public string Interaction_10 { get; set; }
+        public string Interaction_11 { get; set; }
+        public string Interaction_12 { get; set; }
+        public string Interaction_13 { get; set; }
+        public string Interaction_14 { get; set; }
+        public string Interaction_15 { get; set; }
+        public string Interaction_16 { get; set; }
+        public string Interaction_17 { get; set; }
+        public string Interaction_18 { get; set; }
+        public string Interaction_19 { get; set; }
+        public string Interaction_20 { get; set; }
+        public string Interaction_21 { get; set; }
+        public string Interaction_22 { get; set; }
+        public string Interaction_23 { get; set; }
+        public string Interaction_24 { get; set; }
+        public string Interaction_25 { get; set; }
+        public string Interaction_26 { get; set; }
+        public string Interaction_27 { get; set; }
+        public string Interaction_28 { get; set; }
+        public string Interaction_29 { get; set; }
+        public string Interaction_30 { get; set; }
+        public string Interaction_31 { get; set; }
+        public string Interaction_32 { get; set; }
+        public string Interaction_33 { get; set; }
+        public string Interaction_34 { get; set; }
+        public string Interaction_35 { get; set; }
+        public string Interaction_36 { get; set; }
+        public string Interaction_37 { get; set; }
+        public string Interaction_38 { get; set; }
+        public string Interaction_39 { get; set; }
+        public string Interaction_40 { get; set; }
+        public string Interaction_41 { get; set; }
+        public string Interaction_42 { get; set; }
+        public string Interaction_43 { get; set; }
+        public string Interaction_44 { get; set; }
+        public string Interaction_45 { get; set; }
+        public string Interaction_46 { get; set; }
+        public string Interaction_47 { get; set; }
+        public string Interaction_48 { get; set; }
+        public string Interaction_49 { get; set; }
+        public string Interaction_50 { get; set; }
+
+        public List<string> AllInteractions = new List<string>();
+
+        public void CreateInteractionsList()
+        {
+            foreach (var item in GetType().GetTypeInfo().DeclaredFields)
+            {
+                if (item.Name.StartsWith("interaction"))
+                {
+                    if (string.IsNullOrWhiteSpace((string)item.GetValue(this)))
+                    {
+                        AllInteractions.Add(item.GetValue(this) as string);
+                    }
+                }
+            }
+        }
+    }
+}
