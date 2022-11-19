@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,36 +16,37 @@ namespace Cleverbot.Net
     public class CleverbotSession
     {
         private static readonly HttpClient s_httpClient = new HttpClient();
-
         private readonly string _apiKey;
-        public string ConversationId { get; set; }
-        public string CleverbotState { get; set; }
-        public string LastRawResponse { get; set; }
-        public string Test { get; set; }
+        private string _conversationId { get; set; }
+        private string _cleverbotState { get; set; }
+        
 
 
         public CleverbotSession(string apiKey, string cleverBotState)
         {
             _apiKey = apiKey;
-            CleverbotState = cleverBotState;
+            _cleverbotState = cleverBotState;
         }
 
         public async Task<CleverbotResponse> GetResponseAsync(string message)
         {
-            string conversationLine = (string.IsNullOrWhiteSpace(CleverbotState) ? "" : $"&cs={CleverbotState}");
+            string conversationLine = (string.IsNullOrWhiteSpace(_cleverbotState) ? "" : $"&cs={_cleverbotState}");
 
             string result = await s_httpClient.GetStringAsync($"https://www.cleverbot.com/getreply?key={_apiKey}&input={message}{conversationLine}").ConfigureAwait(false);
-            LastRawResponse = result;
-            CleverbotResponse response = JsonConvert.DeserializeObject<CleverbotResponse>(result);
-            ConversationId = response.ConversationId;
-            CleverbotState = response.CleverBotState;
-            if (response == null)
+            try
+            {
+                CleverbotResponse response = JsonConvert.DeserializeObject<CleverbotResponse>(result);
+                response.RawResponse = result;
+                response.CreateInteractionsList();
+
+                _conversationId = response.Conversation_Id;
+                _cleverbotState = response.CleverBotState;
+                return response;
+            }
+            catch
             {
                 return null;
             }
-            response.CreateInteractionsList();
-
-            return response;
         }
     }
 }

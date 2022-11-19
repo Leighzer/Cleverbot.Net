@@ -31,22 +31,10 @@ namespace Cleverbot.Net.Example
                 response = await cleverbotSession.GetResponseAsync(msg);                
                 Console.CursorLeft = 0;
                 Console.WriteLine(response.Output);
-
-                string fileContent = File.ReadAllText("test.txt");
-                StringBuilder fileContents = new StringBuilder(fileContent);
-
-                bool capNext = false;
-                for (int i = 0; i < fileContents.Length; i++)
-                {
-                    if (capNext)
-                    {
-                        fileContents[i] = fileContents[i].ToString().ToUpper().ToCharArray()[0];
-                    }
-
-                    capNext = fileContents[i] == '_';
-                }
-
-                File.WriteAllText("test2.txt", fileContents.ToString());
+                Console.WriteLine(response.RawResponse);
+                Console.WriteLine(response.Interaction_1);
+                Console.WriteLine(response.Interaction_1_Other);
+                Console.WriteLine(response.Interaction_Count);
             }
         }
     }
