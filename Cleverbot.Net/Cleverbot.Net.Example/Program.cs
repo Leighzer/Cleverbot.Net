@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using System.Text;
 
 namespace Cleverbot.Net.Example
 {
@@ -19,22 +15,19 @@ namespace Cleverbot.Net.Example
 
             CleverbotSession cleverbotSession = new CleverbotSession(apiKey, string.Empty);
 
-            Console.WriteLine("Hello in the Cleverbot.Net test app, please type your message.\n");
+            Console.WriteLine("Hello welcome in the Cleverbot.Net test app, please type your message.\n");
 
             string? msg;
-            CleverbotResponse response;
+            CleverbotResponse cleverbotResponse;
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
                 msg = Console.ReadLine();
                 Console.Write("...");
-                response = await cleverbotSession.GetResponseAsync(msg);                
+                cleverbotResponse = await cleverbotSession.GetResponseAsync(msg);                
                 Console.CursorLeft = 0;
-                Console.WriteLine(response.Output);
-                Console.WriteLine(response.RawResponse);
-                Console.WriteLine(response.Interaction_1);
-                Console.WriteLine(response.Interaction_1_Other);
-                Console.WriteLine(response.Interaction_Count);
+                Console.WriteLine(cleverbotResponse.Output);
+                Console.WriteLine(cleverbotResponse.RawResponse);
             }
         }
     }

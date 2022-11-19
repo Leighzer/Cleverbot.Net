@@ -17,10 +17,7 @@ namespace Cleverbot.Net
     {
         private static readonly HttpClient s_httpClient = new HttpClient();
         private readonly string _apiKey;
-        private string _conversationId { get; set; }
         private string _cleverbotState { get; set; }
-        
-
 
         public CleverbotSession(string apiKey, string cleverBotState)
         {
@@ -28,19 +25,21 @@ namespace Cleverbot.Net
             _cleverbotState = cleverBotState;
         }
 
-        public async Task<CleverbotResponse> GetResponseAsync(string message)
+        public async Task<CleverbotResponse?> GetResponseAsync(string message)
         {
-            string conversationLine = (string.IsNullOrWhiteSpace(_cleverbotState) ? "" : $"&cs={_cleverbotState}");
+            // pass along entire encoded history state to clever bot to pick up convo from
+            string cleverbotState = (string.IsNullOrWhiteSpace(_cleverbotState) ? string.Empty : $"&cs={_cleverbotState}");
 
-            string result = await s_httpClient.GetStringAsync($"https://www.cleverbot.com/getreply?key={_apiKey}&input={message}{conversationLine}").ConfigureAwait(false);
+            string result = await s_httpClient.GetStringAsync($"https://www.cleverbot.com/getreply?key={_apiKey}&input={message}{cleverbotState}").ConfigureAwait(false);
             try
             {
                 CleverbotResponse response = JsonConvert.DeserializeObject<CleverbotResponse>(result);
-                response.RawResponse = result;
-                response.CreateInteractionsList();
-
-                _conversationId = response.Conversation_Id;
-                _cleverbotState = response.CleverBotState;
+                if (response != null)
+                {
+                    response.RawResponse = result;
+                    response.CreateInteractionsList();
+                    _cleverbotState = response.CleverBotState;
+                }
                 return response;
             }
             catch
