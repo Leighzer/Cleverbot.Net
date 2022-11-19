@@ -20,6 +20,7 @@ namespace Cleverbot.Net
         public string ConversationId { get; set; }
         public string CleverbotState { get; set; }
         public string LastRawResponse { get; set; }
+        public string Test { get; set; }
 
 
         public CleverbotSession(string apiKey, string cleverBotState)
@@ -36,7 +37,7 @@ namespace Cleverbot.Net
             LastRawResponse = result;
             CleverbotResponse response = JsonConvert.DeserializeObject<CleverbotResponse>(result);
             ConversationId = response.ConversationId;
-            CleverbotState = response.cleverBotState;
+            CleverbotState = response.CleverBotState;
             if (response == null)
             {
                 return null;
