@@ -12,8 +12,9 @@ namespace Cleverbot.Net.Example
                                                 .Build();
 
             var apiKey = configuration.GetValue<string>("API_KEY");
+            var cleverbotUrl = configuration.GetValue<string>("CleverbotUrl");
 
-            CleverbotSession cleverbotSession = new CleverbotSession(apiKey, string.Empty);
+            CleverbotSession cleverbotSession = new CleverbotSession(apiKey, cleverbotUrl, string.Empty);
 
             Console.WriteLine("Hello welcome in the Cleverbot.Net test app, please type your message.\n");
 
