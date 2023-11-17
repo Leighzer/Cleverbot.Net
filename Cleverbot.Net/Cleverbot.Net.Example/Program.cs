@@ -25,7 +25,7 @@ namespace Cleverbot.Net.Example
                 Console.ForegroundColor = ConsoleColor.Gray;
                 msg = Console.ReadLine();
                 Console.Write("...");
-                cleverbotResponse = await cleverbotSession.GetResponseAsync(msg);                
+                cleverbotResponse = await cleverbotSession.GetResponseAsync(msg);
                 Console.CursorLeft = 0;
                 Console.WriteLine(cleverbotResponse.Output);
                 Console.WriteLine(cleverbotResponse.RawResponse);

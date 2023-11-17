@@ -1,5 +1,5 @@
 namespace Cleverbot.Net.MockApi
-{   
+{
     public class Program
     {
         public static void Main(string[] args)

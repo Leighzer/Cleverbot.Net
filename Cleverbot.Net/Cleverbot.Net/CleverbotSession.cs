@@ -1,10 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cleverbot.Net
 {
@@ -27,7 +21,7 @@ namespace Cleverbot.Net
             _cleverbotState = cleverBotState;
         }
 
-        public async Task<CleverbotResponse?> GetResponseAsync(string message)
+        public async Task<CleverbotResponse> GetResponseAsync(string message)
         {
             // pass along entire encoded history state to clever bot to pick up convo from
             // if we have it

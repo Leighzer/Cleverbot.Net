@@ -2,7 +2,7 @@
 using System.Reflection;
 
 namespace Cleverbot.Net
-{   
+{
     public class CleverbotResponse
     {
         [JsonProperty("cs")]
