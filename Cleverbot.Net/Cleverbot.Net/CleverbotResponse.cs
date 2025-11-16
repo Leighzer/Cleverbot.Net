@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using System.Reflection;
+﻿using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Cleverbot.Net
 {
     public class CleverbotResponse
     {
-        [JsonProperty("cs")]
+        [JsonPropertyName("cs")]
         public string CleverBotState { get; set; }
         public string Interaction_Count { get; set; }
         public string Input { get; set; }

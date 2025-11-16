@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace Cleverbot.Net
 {
@@ -30,7 +30,7 @@ namespace Cleverbot.Net
             string result = await s_httpClient.GetStringAsync($"{_cleverbotUrl}?key={_apiKey}&input={message}{cleverbotState}").ConfigureAwait(false);
             try
             {
-                CleverbotResponse response = JsonConvert.DeserializeObject<CleverbotResponse>(result);
+                CleverbotResponse response = JsonSerializer.Deserialize<CleverbotResponse>(result);
                 if (response != null)
                 {
                     response.RawResponse = result;
